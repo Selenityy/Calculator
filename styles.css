@@ -79,11 +79,12 @@ body {
     color: white;
     display: flex;
     justify-content: flex-end;
+    align-items: flex-end;
     padding-left: 179px;
-    padding-top: 82px;
+    /* padding-top: 97px; */
     padding-bottom: 8px;
     width: 246px;
-    height: 30px;
+    height: 125px;
 }
 
 .HKpng {
@@ -93,6 +94,7 @@ body {
     height: 124px;
     object-fit: cover;
     padding-left: 30px;
+    margin-bottom: -14px;
 }
 
 #input {
@@ -169,6 +171,10 @@ button {
     background-color: #fc6799;
 }
 
+#percent {
+    font-size: 45px;
+}
+
 #clear,
 #delete {
     font-size: 38px;
@@ -198,4 +204,6 @@ button {
 
 #divide {
     font-size: 45pt;
+    font-weight: 900;
+    padding-bottom: 15px;
 }
