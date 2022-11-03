@@ -95,7 +95,7 @@ body {
 
 button {
     font-family: "Hello Kitty 2";
-    font-size: 30pt;
+    font-size: 35pt;
     border-radius: 50%;
     border-color: white;
     box-shadow: none;
@@ -147,7 +147,7 @@ button {
 
 #clear,
 #delete {
-    font-size: 30px;
+    font-size: 35px;
 }
 
 #one,
