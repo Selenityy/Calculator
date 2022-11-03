@@ -28,8 +28,8 @@ body {
     display: flex;
     align-self: flex-end;
     margin-bottom: -20px;
-    margin-left: 42px;
-    color: #fb81bd;
+    margin-left: 28px;
+    color: #fc6799;
 }
 
 .bow {
@@ -41,11 +41,6 @@ body {
     object-fit: contain;
     margin-bottom: -92px;
 }
-
-/* h1 {
-    font-family: "Hello Kitty";
-    font-size: 60pt;
-} */
 
 #calculator_box {
     display: flex;
@@ -61,8 +56,9 @@ body {
 #screen {
     display: flex;
     flex-direction: row;
-    background-color: #ffa8d3;
-    padding-top: 100px;
+    background-color: #feb8dc;
+    padding-top: 120px;
+    padding-bottom: 110px;
     justify-content: space-between;
     border-radius: 34px 34px 0 0;
     overflow: hidden;
@@ -74,7 +70,7 @@ body {
     width: 167px;
     height: 124px;
     object-fit: cover;
-    padding-left: 10px;
+    padding-left: 30px;
 }
 
 #input {
@@ -82,8 +78,8 @@ body {
     font-size: 60pt;
     color: white;
     display: flex;
-    padding-right: 60px;
-    align-self: flex-end;
+    padding-right: 62px;
+    align-self: flex-start;
 }
 
 .buttons {
@@ -93,17 +89,25 @@ body {
     align-content: space-around;
     padding-top: 40px;
     padding-bottom: 60px;
+    width: 500px;
+    height: 740px;
 }
 
 button {
     font-family: "Hello Kitty 2";
     font-size: 30pt;
     border-radius: 50%;
+    border-color: white;
+    box-shadow: none;
+    border-width: 0px;
     width: 70px;
     height: 70px;
     padding: 5px;
-    background-color: #ffa8d3;
+    background-color: #feb8dc;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #first_row_buttons {
@@ -133,4 +137,37 @@ button {
 #fifth_row_buttons {
     display: flex;
     justify-content: space-evenly;
+}
+
+#clear,
+#delete,
+#percent {
+    background-color: #fc6799;
+}
+
+#clear,
+#delete {
+    font-size: 30px;
+}
+
+#one,
+#two,
+#three,
+#four,
+#five,
+#six,
+#seven,
+#eight,
+#nine,
+#zero,
+#decimal {
+    background-color: #ffebf6;
+    color: #fc6799;
+}
+
+#equals {
+    width: 183px;
+    height: 70px;
+    padding: 5px;
+    border-radius: 50px;
 }
