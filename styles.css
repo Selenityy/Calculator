@@ -175,7 +175,10 @@ button {
     font-size: 45px;
 }
 
-#clear,
+#clear {
+    font-size: 45px;
+}
+
 #delete {
     font-size: 38px;
 }
