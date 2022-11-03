@@ -28,7 +28,7 @@ body {
     display: flex;
     align-self: flex-end;
     margin-bottom: -20px;
-    margin-left: 28px;
+    margin-left: 0px;
     color: #fc6799;
 }
 
@@ -36,10 +36,10 @@ body {
     display: flex;
     align-self: flex-end;
     transform: scaleY(-1);
-    width: 194px;
+    width: 224px;
     height: 156px;
     object-fit: contain;
-    margin-bottom: -92px;
+    margin-bottom: -89px;
 }
 
 #calculator_box {
@@ -95,7 +95,7 @@ body {
 
 button {
     font-family: "Hello Kitty 2";
-    font-size: 35pt;
+    font-size: 40pt;
     border-radius: 50%;
     border-color: white;
     box-shadow: none;
@@ -147,7 +147,7 @@ button {
 
 #clear,
 #delete {
-    font-size: 35px;
+    font-size: 38px;
 }
 
 #one,
@@ -170,4 +170,8 @@ button {
     height: 70px;
     padding: 5px;
     border-radius: 50px;
+}
+
+#divide {
+    font-size: 45pt;
 }
