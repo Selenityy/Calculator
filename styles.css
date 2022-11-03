@@ -55,13 +55,35 @@ body {
 
 #screen {
     display: flex;
+    flex-direction: column;
+    border-radius: 34px 34px 0 0;
+    background-color: #feb8dc;
+}
+
+#bottom_screen {
+    display: flex;
     flex-direction: row;
     background-color: #feb8dc;
-    padding-top: 120px;
-    padding-bottom: 110px;
+    /* padding-top: 21px; */
+    /* padding-bottom: 110px; */
     justify-content: space-between;
-    border-radius: 34px 34px 0 0;
+    /* border-radius: 34px 34px 0 0; */
     overflow: hidden;
+}
+
+#history {
+    font-family: "Hello Kitty";
+    font-size: 30pt;
+    font-style: italic;
+    opacity: 0.8;
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    padding-left: 179px;
+    padding-top: 82px;
+    padding-bottom: 8px;
+    width: 246px;
+    height: 30px;
 }
 
 .HKpng {
@@ -79,7 +101,9 @@ body {
     color: white;
     display: flex;
     padding-right: 62px;
-    align-self: flex-start;
+    justify-content: flex-end;
+    width: 246px;
+    /* align-self: flex-end; */
 }
 
 .buttons {
@@ -87,7 +111,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-content: space-around;
-    padding-top: 40px;
+    padding-top: 35px;
     padding-bottom: 60px;
     width: 500px;
     height: 740px;
