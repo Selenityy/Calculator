@@ -1,36 +1,26 @@
-// input options
-const operators = ["+", "-", "*", "/", "%"];
-const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "."];
-console.log(typeof(operators));
-console.log(operators);
-console.log(typeof(digits));
-console.log(digits);
+// selects all keys
+const keys = Array.from(document.querySelectorAll(".key"));
 
-// addition function
-function add(array) {
-    return array.reduce((a, b) => a + b);
+// changes the screen input
+function clicked(e) {
+    const number = e.target.innerHTML;
+    document.getElementById("input").innerHTML += number; 
 };
-console.log(add([2,3]));
 
-// subtraction function
-function subtract(array) {
-    return array.reduce((a, b) => a - b);
-};
-console.log(subtract([3,4]));
+// each key when clicked on the website will run input
+keys.forEach(key => key.addEventListener('click', clicked));
 
-// multiply function
-function multiply(array) {
-    return array.reduce((a, b) => a * b);
-};
-console.log(multiply([2, 5]));
+function pressed(e) {
+    const number = e.key;
+    const button = document.querySelector(`button[data-key="${e.keyCode}"]`);
+    if (!button) return;
 
-// divide function
-function divide(array) {
-    return array.reduce((a, b) => a / b);
-};
-console.log(divide([4, 2]));
+    document.getElementById("input").innerHTML += number; 
+}
 
-// operator function
-// function operate(array) {
-//     return array.reduce((a, b, c) => a c b);
-// };
+// each key when pressed on the keyboard
+window.addEventListener('keydown', pressed);
+
+function add(a, b) {
+    return a + b;
+}
