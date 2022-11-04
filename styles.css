@@ -171,6 +171,13 @@ button {
     background-color: #fc6799;
 }
 
+#clear:active,
+#delete:active,
+#percent:active {
+    background-color: #ffebf6;
+    color: #fc6799;
+}
+
 #percent {
     font-size: 45px;
 }
@@ -209,4 +216,28 @@ button {
     font-size: 45pt;
     font-weight: 900;
     padding-bottom: 15px;
+}
+
+#divide:active,
+#multiply:active,
+#plus:active,
+#minus:active,
+#equals:active {
+    background-color: #ffebf6;
+    color: #fc6799;
+}
+
+#decimal:active,
+#zero:active,
+#one:active,
+#two:active,
+#three:active,
+#four:active,
+#five:active,
+#six:active,
+#seven:active,
+#eight:active,
+#nine:active {
+    background-color: #fc6799;
+    color: #ffebf6;
 }
