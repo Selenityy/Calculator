@@ -1,17 +1,29 @@
 let firstInput = true;
-const keys = Array.from(document.querySelectorAll(".key"));
-const digit = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
-const operator = ["+", "-", "×", "÷", "%"];
-const clear = "c";
-const remove = "Del";
-const equals = "=";
+const keys = document.querySelectorAll(".key");
+const digit = document.querySelectorAll(".digits");
+const operator = document.querySelectorAll(".operator");
+const clear = document.getElementById("clear");
+const remove = document.getElementById("delete");
+const equals = document.getElementById("equals");
 let input = document.getElementById("input");
 let num1, num2, op;
 
-
+// if e.type is 'click' or if e.type is 'keydown' run the appropriate function
+function userInput(e) {
+    if(e.type === "click") {
+        clicked(e);
+    } else if(e.type === "keydown") {
+        typed(e);
+    } else {
+        return;
+    }
+}
 
 // changes the screen input for clicking a button
+keys.forEach(key => key.addEventListener('click', userInput));
+
 function clicked(e) {
+    console.log(e.type);
     const number = e.target.innerHTML;
     console.log(number);
     if(firstInput) {
@@ -24,7 +36,7 @@ function clicked(e) {
             input.innerHTML += number;
         } 
     }
-    if(number === clear.toUpperCase()) {
+    if(number === clear) {
         input.innerHTML = "0";
     }
     if(number === remove) {
@@ -42,35 +54,54 @@ function clicked(e) {
     console.log("num1= " + num1);
     console.log("num2= " + num2);
 };
-// each key when clicked on the website will run input
-keys.forEach(key => key.addEventListener('click', clicked));
 
 
+// changes the screen input for pressing a key
+window.addEventListener('keydown', userInput);
+
+function typed(e) {
+    console.log(e.type);
+    const number = e.key;
+    const button = document.querySelector(`button[data-key="${e.key}"]`);
+    console.log(number);
+    console.log(button);
+    if (!button) {
+        return;
+    } else if (number === "c") {
+        clearScreen();
+    } else if (number === "Backspace") {
+        deleteInput();
+    } else if(input.innerHTML.length >= 7) {
+        charLimit();
+    } else if(firstInput) {
+        input.innerHTML = number;
+        firstInput = false;
+    } else {
+        input.innerHTML += number;
+    }
+}
+
+// zero's out screen and restarts the firstInput
+function clearScreen() {
+    input.innerHTML = "0";
+    firstInput = true;
+};
+
+// deletes the last digit entered, and if it's the very last then it restarts at cleared
+function deleteInput() {
+  if(input.innerHTML.length === 1) {
+    clearScreen();
+  } else {
+    input.innerHTML = input.innerHTML.substring(0, input.innerHTML.length -1);
+  }
+};
+
+// limits the inputs to 6 characters
+function charLimit() {
+    return input.innerHTML.substring(0,6);
+};
+
+// addition
 function compute(a, b) {
     return parseInt(a) + parseInt(b);
 };
-
-// changes the screen input for pressing a key
-// function pressed(e) {
-//     const number = e.key;
-//     const button = document.querySelector(`button[data-key="${e.key}"]`);
-//     // input = document.getElementById("input");
-//     console.log(number)
-//     if (!button) {
-//         return;
-//     } else if (number === "c") {
-//         input.innerHTML = "0";
-//         firstInput = true;
-//     } else if (number === "Backspace") {
-//        input.innerHTML = input.innerHTML.substring(0, input.innerHTML.length -1);
-//     } else {
-//         input.innerHTML += number;
-//     }
-// }
-// // each key when pressed on the keyboard will run input
-// window.addEventListener('keydown', pressed);
-
-// function add(a, b) {
-//     return a + b;
-// }
-
