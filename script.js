@@ -27,14 +27,20 @@ function clicked(e) {
     console.log(e.type);
     const number = e.target.innerHTML;
     console.log(number);
-    if(firstInput) {
-        if(keys) {
+    const isDigitRegex = new RegExp(/(\d|\.)/);
+    const isOperatorRegex = new RegExp(/[\+\-\÷\×\%]/);
+    let isDigit = isDigitRegex.test(number);
+    let isOperator = isOperatorRegex.test(number);
+    if (firstInput) {
+        if (isDigit) {
             input.innerHTML = number;
             history.innerHTML = number;
             firstInput = false;
-        } 
+        } else {
+            clearScreen();
+        }
     } else {
-        if(keys) {
+        if(isDigit || isOperator) {
             input.innerHTML += number;
             history.innerHTML +=number;
         } 
@@ -46,17 +52,18 @@ function clicked(e) {
         deleteInput();
     }
     if(number === "+") {
-        num1 = input.innerHTML.substring(0, input.innerHTML.length -1);
+        num1 = parseInt(input.innerHTML.substring(0, input.innerHTML.length -1));
         // input.innerHTML += "+";
         op = "+";
     }
     if(number === "=") {
-        num2 = input.innerHTML.replace(num1, "").replace(op, "").replace("=", "");
-        input.innerHTML = compute(num1, num2);
+        num2 = parseInt(input.innerHTML.replace(num1, "").replace(op, "").replace("=", ""));
+        input.innerHTML = compute(op);
         history.innerHTML += input.innerHTML;
     }
     console.log("num1= " + num1);
     console.log("num2= " + num2);
+    console.log("operator= " + op);
 };
 
 
@@ -107,7 +114,38 @@ function charLimit() {
     return history.innerHTML.substring(0,6);
 };
 
-// addition
-function compute(a, b) {
-    return parseInt(a) + parseInt(b);
+
+function compute(op) {
+    switch (op) {
+        case "×":
+            return multiply();
+        case "÷":
+            return divide();
+        case "+":
+            return add();
+        case "-":
+            return subtract();
+    }
+};
+
+
+function multiply() {
+    return num1 * num2;
+};
+
+function divide() {
+   if(num2 ===0) {
+     alert("You cannot divide by zero!");
+     return;  
+   } else {
+        return num1 / num2;
+   }
+};
+
+function add() {
+    return num1 + num2;
+};
+
+function subtract() {
+    return num1 - num2;
 };
