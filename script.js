@@ -11,9 +11,9 @@ let num1, num2, op;
 
 // if e.type is 'click' or if e.type is 'keydown' run the appropriate function
 function userInput(e) {
-    if(e.type === "click") {
+    if (e.type === "click") {
         clicked(e);
-    } else if(e.type === "keydown") {
+    } else if (e.type === "keydown") {
         typed(e);
     } else {
         return;
@@ -28,7 +28,7 @@ function clicked(e) {
     const number = e.target.innerHTML;
     console.log(number);
     const isDigitRegex = new RegExp(/(\d|\.)/);
-    const isOperatorRegex = new RegExp(/[\+\-\÷\×\%]/);
+    const isOperatorRegex = new RegExp(/[\+\−\÷\×\%]/);
     let isDigit = isDigitRegex.test(number);
     let isOperator = isOperatorRegex.test(number);
     if (firstInput) {
@@ -40,26 +40,33 @@ function clicked(e) {
             clearScreen();
         }
     } else {
-        if(isDigit || isOperator) {
+        if (isDigit || isOperator) {
             input.innerHTML += number;
             history.innerHTML +=number;
         } 
     }
-    if(number === "C") {
+
+    if (number === "C") {
         clearScreen();
     }
-    if(number === "Del") {
+    if (number === "Del") {
         deleteInput();
     }
-    if(number === "+") {
-        num1 = parseInt(input.innerHTML.substring(0, input.innerHTML.length -1));
-        // input.innerHTML += "+";
-        op = "+";
+    if (number === "+") {
+        num1 = Number(parseFloat(input.innerHTML.substring(0, input.innerHTML.length -1)));
+        op = "+";   
+    } else if (number === "−") {
+        num1 = Number(parseFloat(input.innerHTML.substring(0, input.innerHTML.length -1)));
+        op = "−";       
+    } else if (number === "×") {
+        num1 = Number(parseFloat(input.innerHTML.substring(0, input.innerHTML.length -1)));
+        op = "×";      
+    } else if (number === "÷") {
+        num1 = Number(parseFloat(input.innerHTML.substring(0, input.innerHTML.length -1)));
+        op = "÷";    
     }
-    if(number === "=") {
-        num2 = parseInt(input.innerHTML.replace(num1, "").replace(op, "").replace("=", ""));
-        input.innerHTML = compute(op);
-        history.innerHTML += input.innerHTML;
+    if (number === "=") {
+        evaluate();
     }
     console.log("num1= " + num1);
     console.log("num2= " + num2);
@@ -110,10 +117,17 @@ function deleteInput() {
 
 // limits the inputs to 6 characters
 function charLimit() {
-    return input.innerHTML.substring(0,6);
-    return history.innerHTML.substring(0,6);
+    input.innerHTML.substring(0,6);
+    history.innerHTML.substring(0,6);
 };
 
+function evaluate() {
+    num2 = Number(parseFloat(input.innerHTML.replace(num1, "").replace(op, "").replace("=", "")));
+   // num1 = Number(parseFloat(input.innerHTML.substring(0, input.innerHTML.length -1)));
+
+    input.innerHTML = Number(compute(op).toFixed(2));
+    history.innerHTML += "=" + input.innerHTML;
+}
 
 function compute(op) {
     switch (op) {
@@ -123,7 +137,8 @@ function compute(op) {
             return divide();
         case "+":
             return add();
-        case "-":
+        case "−":
+            console.log("hi");
             return subtract();
     }
 };
