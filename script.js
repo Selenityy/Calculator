@@ -2,6 +2,7 @@ let firstInput = true;
 const keys = document.querySelectorAll(".key");
 const digit = document.querySelectorAll(".digits");
 const operator = document.querySelectorAll(".operator");
+const percentage = document.getElementById("percent");
 const clear = document.getElementById("clear");
 const remove = document.getElementById("delete");
 const equals = document.getElementById("equals");
@@ -40,12 +41,18 @@ function clicked(e) {
             clearScreen();
         }
     } else {
-        if (isDigit || isOperator) {
-            input.innerHTML += number;
+        if (isDigit) {
+            input.innerHTML = number;
             history.innerHTML +=number;
+        } else if (isOperator) {
+            if (isOperatorRegex.test(history.innerHTML.slice(-1))) {
+                return;
+            } else {
+                console.log("mew")
+                history.innerHTML +=number;
+            }
         } 
     }
-
     if (number === "C") {
         clearScreen();
     }
@@ -53,17 +60,19 @@ function clicked(e) {
         deleteInput();
     }
     if (number === "+") {
-        num1 = Number(parseFloat(input.innerHTML.substring(0, input.innerHTML.length -1)));
+        num1 = Number(parseFloat(history.innerHTML.substring(0, history.innerHTML.length -1)));
         op = "+";   
     } else if (number === "−") {
-        num1 = Number(parseFloat(input.innerHTML.substring(0, input.innerHTML.length -1)));
+        num1 = Number(parseFloat(history.innerHTML.substring(0, history.innerHTML.length -1)));
         op = "−";       
     } else if (number === "×") {
-        num1 = Number(parseFloat(input.innerHTML.substring(0, input.innerHTML.length -1)));
+        num1 = Number(parseFloat(history.innerHTML.substring(0, history.innerHTML.length -1)));
         op = "×";      
     } else if (number === "÷") {
-        num1 = Number(parseFloat(input.innerHTML.substring(0, input.innerHTML.length -1)));
+        num1 = Number(parseFloat(history.innerHTML.substring(0, history.innerHTML.length -1)));
         op = "÷";    
+    } else if (number === "%") {
+        percent();
     }
     if (number === "=") {
         evaluate();
@@ -88,8 +97,6 @@ function typed(e) {
         clearScreen();
     } else if (number === "Backspace") {
         deleteInput();
-    } else if(input.innerHTML.length >= 7) {
-        charLimit();
     } else if(firstInput) {
         input.innerHTML = number;
         firstInput = false;
@@ -115,20 +122,14 @@ function deleteInput() {
   }
 };
 
-// limits the inputs to 6 characters
-function charLimit() {
-    input.innerHTML.substring(0,6);
-    history.innerHTML.substring(0,6);
-};
-
+// labels num2 after clicking equals, uses the compute function to give final input answer
 function evaluate() {
-    num2 = Number(parseFloat(input.innerHTML.replace(num1, "").replace(op, "").replace("=", "")));
-   // num1 = Number(parseFloat(input.innerHTML.substring(0, input.innerHTML.length -1)));
-
+    num2 = Number(parseFloat(history.innerHTML.replace(num1, "").replace(op, "").replace("=", "")));
     input.innerHTML = Number(compute(op).toFixed(2));
     history.innerHTML += "=" + input.innerHTML;
 }
 
+// runs the actual computing functions and returns to evaluate function
 function compute(op) {
     switch (op) {
         case "×":
@@ -138,12 +139,11 @@ function compute(op) {
         case "+":
             return add();
         case "−":
-            console.log("hi");
             return subtract();
     }
 };
 
-
+// functions for computing
 function multiply() {
     return num1 * num2;
 };
@@ -164,3 +164,11 @@ function add() {
 function subtract() {
     return num1 - num2;
 };
+
+function percent() {
+    num1 = Number(parseFloat(history.innerHTML.substring(0, history.innerHTML.length -1)));
+    op = "%"
+    let perc = (num1 / 100).toFixed(2);
+    input.innerHTML = perc;
+    history.innerHTML = perc;
+}
