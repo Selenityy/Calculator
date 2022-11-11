@@ -18,20 +18,6 @@ clearButton.addEventListener("click", wipeScreen);
 decimalButton.addEventListener("click", deleteInput);
 equalButton.addEventListener("click", computeInput);
 
-// allButtons.forEach(button => button.addEventListener("click", userInput));
-// function userInput(e) {
-//     if (e.type === "click") {
-//         clicked(e);
-//     } else if(e.type === "keydown") {
-//         keyboardInput(e);
-//     } else {
-//         return;
-//     }
-// };
-// function clicked() {
-// };
-
-
 function keyboardInput() {
 
 };
@@ -73,8 +59,8 @@ function deleteInput(){
 };
 
 function charLimit() {
-    return inputScreen.innerHTML.substring(0,6);
-    return historyScreen.innerHTML.substring(0,6);
+    inputScreen.innerHTML.substring(0,6);
+    historyScreen.innerHTML.substring(0,6);
 };
 
 function computeInput(operator) {
