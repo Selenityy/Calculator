@@ -80,11 +80,12 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    padding-left: 179px;
-    /* padding-top: 97px; */
+    margin-left: 179px;
+    padding-right: 10px;
     padding-bottom: 8px;
     width: 246px;
     height: 125px;
+    overflow: hidden;
 }
 
 .HKpng {
@@ -104,8 +105,8 @@ body {
     display: flex;
     padding-right: 62px;
     justify-content: flex-end;
+    overflow: hidden;
     width: 246px;
-    /* align-self: flex-end; */
 }
 
 .buttons {
