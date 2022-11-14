@@ -89,6 +89,7 @@ function clicked(e) {
     if (number === "C" || number === "c") {
         console.log("pressed clear")
         clearScreen();
+
     }
     if (number === "Del" || number === "Backspace") {
         console.log("pressed delete")
@@ -100,6 +101,9 @@ function clicked(e) {
     }
     if (number === "=" || number === "Enter") {
         e.preventDefault();
+        if (isEqualsRegex.test(history.innerHTML.slice(-1))) {
+            return;
+        }
         history.innerHTML += "=";
         console.log("pressed equals")
         evaluate();
@@ -115,6 +119,7 @@ function clearScreen() {
     op = "";
     firstInput = true;
     hasEvaluated = false;
+    firstOperator = true;
 };
 
 // deletes the last digit entered, and if it's the very last then it restarts at cleared
@@ -135,10 +140,14 @@ function evaluate() {
     if(!hasEvaluated) {
         num1 = Number(parseFloat(history.innerHTML.substring(0, history.innerHTML.indexOf(op))));
         num2 = Number(parseFloat(history.innerHTML.substring(history.innerHTML.indexOf(op) +1, 99999999)));
+        console.log("has not evaluated, num1 =" + num1);
+        console.log("has not evaluated, num2 =" + num2);
         // num2 = Number(parseFloat(history.innerHTML.substring(history.innerHTML.indexOf(op) +1, history.innerHTML.indexOf("="))));
     } else {
         num1 = Number(parseFloat(history.innerHTML.substring(0, history.innerHTML.indexOf(op))));
         num2 = Number(parseFloat(history.innerHTML.substring(history.innerHTML.indexOf(op) +1, 99999999)));
+        console.log("has evaluated, num1 =" + num1);
+        console.log("has evaluated, num2 = " + num2);
         //num2 = Number(parseFloat(history.innerHTML.substring(history.innerHTML.lastIndexOf(op) +1, history.innerHTML.indexOf("="))));
     }
     input.innerHTML = Number(compute(op).toFixed(2));
