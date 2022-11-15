@@ -66,7 +66,7 @@ function clicked(e) {
             // if the new input is an operator and the last input was an operator, do nothing
             if (isOperatorRegex.test(history.innerHTML.slice(-1))) {
                 console.log("operator and the last button was operator");
-                return;
+                history.innerHTML = history.innerHTML.replace(history.innerHTML.slice(-1), number);
             // if the new input is an operator and the last input is an equals, then store the full equation in history and only the outcome on the screen
             } else if (isEqualsRegex.test(history.innerHTML.slice(-1))) {
                 history.innerHTML = input.innerHTML + number;
