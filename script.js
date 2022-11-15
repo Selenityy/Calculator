@@ -25,7 +25,6 @@ window.addEventListener('keydown', clicked);
 // data validation for the user input
 function clicked(e) {
     const number = e.type === "click" ? e.target.innerHTML : e.key;
-    console.log(number);
     let isDigit = isDigitRegex.test(number);
     let isOperator = isOperatorRegex.test(number);
     if (firstInput) {
@@ -33,7 +32,6 @@ function clicked(e) {
             input.innerHTML = number;
             history.innerHTML = number;
             firstInput = false;
-            console.log("first input is a digit");
         } else {
             clearScreen();
         }
@@ -45,58 +43,47 @@ function clicked(e) {
                 input.innerHTML = number;
                 history.innerHTML = number;
                 hasEvaluated = false;
-                console.log("digit and last button was equals");
             // if the new input is a digit or decimal and the last input is not an operator or equals (aka a digit), concatenate both history and screen
             } else if (isDigitRegex.test(history.innerHTML.slice(-1))) {
                 input.innerHTML += number;
                 history.innerHTML += number;
-                console.log("digit and last button was a digit");
             // if new input is a digit and the last input was an operator
             } else if (isOperatorRegex.test(history.innerHTML.slice(-1))) {
                 input.innerHTML = number;
                 history.innerHTML += number;
-                console.log("digit and the last input was an operator")
             // if the new input is a digit or decimal and the last input is not an equals oe a digit, then concatenate in history and screen shows new input
             } else {
                 input.innerHTML = number;
                 history.innerHTML +=number;
-                console.log("digit and the last button was not an operator or equals or digit, shouldn't be here");
             }
         } else if (isOperator) {
             // if the new input is an operator and the last input was an operator, do nothing
             if (isOperatorRegex.test(history.innerHTML.slice(-1))) {
-                console.log("operator and the last button was operator");
                 history.innerHTML = history.innerHTML.replace(history.innerHTML.slice(-1), number);
             // if the new input is an operator and the last input is an equals, then store the full equation in history and only the outcome on the screen
             } else if (isEqualsRegex.test(history.innerHTML.slice(-1))) {
                 history.innerHTML = input.innerHTML + number;
-                console.log("operator and the last button was equals");
             // if the new input is an operator and the last input was neither an operator nor an equals, then concatenate to the history
             } else {
                 history.innerHTML += number;
                 if (!firstOperator) {
-                    console.log("evaluated within the operator and else");
                     evaluate();
                     history.innerHTML = num1 + number;
                     input.innerHTML = num1;
                     op = number;
                 }
-                console.log("operator and the last button was a digit");
             }
             firstOperator = false;
         } 
     }
     if (number === "C" || number === "c") {
-        console.log("pressed clear")
         clearScreen();
 
     }
     if (number === "Del" || number === "Backspace") {
-        console.log("pressed delete")
         deleteInput();  
     } 
     if (number === "%") {
-        console.log("pressed percent")
         percent();
     }
     if (number === "=" || number === "Enter") {
@@ -105,7 +92,6 @@ function clicked(e) {
             return;
         }
         history.innerHTML += "=";
-        console.log("pressed equals")
         evaluate();
     }
 };
@@ -137,19 +123,8 @@ function deleteInput() {
 // computes whether it has before or not
 function evaluate() {
     op = history.innerHTML.match(isOperatorRegex).pop();
-    if(!hasEvaluated) {
-        num1 = Number(parseFloat(history.innerHTML.substring(0, history.innerHTML.indexOf(op))));
-        num2 = Number(parseFloat(history.innerHTML.substring(history.innerHTML.indexOf(op) +1, 99999999)));
-        console.log("has not evaluated, num1 =" + num1);
-        console.log("has not evaluated, num2 =" + num2);
-        // num2 = Number(parseFloat(history.innerHTML.substring(history.innerHTML.indexOf(op) +1, history.innerHTML.indexOf("="))));
-    } else {
-        num1 = Number(parseFloat(history.innerHTML.substring(0, history.innerHTML.indexOf(op))));
-        num2 = Number(parseFloat(history.innerHTML.substring(history.innerHTML.indexOf(op) +1, 99999999)));
-        console.log("has evaluated, num1 =" + num1);
-        console.log("has evaluated, num2 = " + num2);
-        //num2 = Number(parseFloat(history.innerHTML.substring(history.innerHTML.lastIndexOf(op) +1, history.innerHTML.indexOf("="))));
-    }
+    num1 = Number(parseFloat(history.innerHTML.substring(0, history.innerHTML.indexOf(op))));
+    num2 = Number(parseFloat(history.innerHTML.substring(history.innerHTML.indexOf(op) +1, 99999999)));
     input.innerHTML = Number(compute(op).toFixed(2));
     num1 = Number(parseFloat(input.innerHTML));
     hasEvaluated = true;
